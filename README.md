@@ -37,7 +37,7 @@ To get the Docker image in the root of the project:
 
 ```shell
 
-https://raw.githubusercontent.com/lshannon/gcp-docker-spring-getting-started/main/Dockerfile
+wget https://raw.githubusercontent.com/lshannon/gcp-docker-spring-getting-started/main/Dockerfile
 
 ```
 
