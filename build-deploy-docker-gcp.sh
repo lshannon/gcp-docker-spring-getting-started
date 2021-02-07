@@ -91,33 +91,37 @@ test_for_docker () {
 
 change_project_routine () {
 	echo "Your current project is: `$(gcloud info | grep -oP 'Project: (\[.+\])')`"
-	echo "Do you want to change your project? (Type 'Y' to change)"
-	read CHANGEPROJECT
-	if [ "$CHANGEPROJECT" = "Y" ]; then
+	echo "Please verify your project name (type it out):"
+	read PROJECTNAME
+	echo "Is $PROJECTNAME name correct? (Type 'N' to change the name):"
+	read CORRECTPROJECTCONFIRMED
+	if [ "$CORRECTPROJECTCONFIRMED" = "N" ]; then
 	  echo "Type in your project name:";
 	  read PROJECTNAME;
 	  echo "Attempting to set project name too $PROJECTNAME..."
-	  sudo gcloud config set project $PROJECTNAME;
+	  gcloud config set project $PROJECTNAME;
 	  echo "Running the Auth command. Open the link that is provided in your browser to authenticate..."
-	  sudo gcloud auth login
+	  gcloud auth login
 	fi
+	echo "We will be proceeding with $PROJECTNAME as your project"
+	verify_to_proceed
 }
 
 verify_location_routine () {
 	echo "Your current directory is $( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
-	echo "Make sure this is the correct directory for `$(gcloud info | grep -oP 'Project: (\[.+\])')` otherwise you risk publishing an wrong DockerImage to a project"
+	echo "Make sure this is the correct directory for $PROJECTNAME otherwise you risk publishing an wrong DockerImage to a project"
 	verify_to_proceed
 }
 
 verify_container_registry_enabled () {
 	echo "Ensure the Container Registry API is enabled in your project"
 	echo "https://cloud.google.com/container-registry"
-  echo "Do you want this script to enable the API? (Type Y to proceed):"
-  read PROCEED
-  if [ "$PROCEED" != "Y" ]; then
-    echo "Running 'gcloud services enable containerregistry.googleapis.com'"
-    gcloud services enable containerregistry.googleapis.com
-  fi
+  	echo "Do you want this script to enable the API? (Type Y to proceed):"
+  	read PROCEED
+  	if [ "$PROCEED" != "Y" ]; then
+    	echo "Running 'gcloud services enable containerregistry.googleapis.com'"
+    	gcloud services enable containerregistry.googleapis.com
+  	fi
 	verify_to_proceed
 }
 
@@ -126,15 +130,18 @@ collect_image_name_routine () {
 	gcloud container images list
 	echo "What image do you wish to deploy too?"
 	read IMAGENAME
+	echo "We will be proceeding with $IMAGENAME in project $PROJECTNAME"
+	verify_to_proceed
 }
 
 first_time_docker () {
-	echo "Is this your first time publishing a Docker Image to the project?"
-	read First_Time_Docker
-	if [ "$CONFIRMATION" = "Y" ]; then
+	echo "Is this your first time publishing Docker Image $IMAGENAME to the project $PROJECTNAME?"
+	read FIRSTTIMEDOCKER
+	if [ "$FIRSTTIMEDOCKER" = "Y" ]; then
       echo "Running 'auth configure-docker'"
       gcloud auth configure-docker
 	fi
+	verify_to_proceed
 }
 
 verify_to_proceed () {
