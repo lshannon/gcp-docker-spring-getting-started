@@ -25,6 +25,22 @@ Run the script with the argument './build-deploy-docker-gcp.sh --usage' to get i
 
 Download the script and Dockerfile from this repo into the root direction of your Spring Boot Maven Application
 
+To get the script in while the root of the project:
+
+```shell
+
+wget https://github.com/lshannon/gcp-docker-spring-getting-started/blob/main/build-deploy-docker-gcp.sh
+
+```
+
+To get the Docker image in the root of the project:
+
+```shell
+
+wget https://github.com/lshannon/gcp-docker-spring-getting-started/blob/main/Dockerfile
+
+```
+
 ## Execution
 
 Run the script as sudo and follow the prompts
