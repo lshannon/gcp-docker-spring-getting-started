@@ -8,14 +8,18 @@ This is not intended for Production. Ensure you review the script before running
 
 ## Requirements
 
+This script is intended for the following environment:
+
 - Spring Boot application built with Maven
 - GCP Account (https://cloud.google.com/)
 - glcoud installed locally (https://cloud.google.com/sdk/docs/install)
 - docker installed locally (https://docs.docker.com/get-docker/)
 
+This script was built to run in a Ubuntu environment. There is no guarantee it will work in any other environment
+
 ## Usage
 
-Run the script with the argument '--usage' to get instructions on what the script does
+Run the script with the argument './build-deploy-docker-gcp.sh --usage' to get instructions on what the script does
 
 ## Installation
 
