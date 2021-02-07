@@ -106,12 +106,13 @@ change_project_routine () {
 verify_location_routine () {
 	echo "Your current directory is $( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 	echo "Make sure this is the correct directory for `$(gcloud info | grep -oP 'Project: (\[.+\])')` otherwise you risk publishing an wrong DockerImage to a project"
-	echo "Continue? (Type 'Y' to proceed)"
-	read CONTINUE
-	if [ "$CONTINUE" != "Y" ]; then
-	  echo "Goodbye for now - Be safe out there"
-	  exit 0;
-	fi
+	verify_to_proceed
+}
+
+verify_container_registry_enabled () {
+	echo "Ensure the Container Registry API is enabled in your project"
+	echo "https://cloud.google.com/container-registry"
+	verify_to_proceed
 }
 
 collect_image_name_routine () {
@@ -125,9 +126,15 @@ first_time_docker () {
 	echo "Is this your first time publishing a Docker Image to the project?"
 	read First_Time_Docker
 	if [ "$CONFIRMATION" = "Y" ]; then
-	  echo "Type in your project name:";
-	  read Project_Name;
-	  echo "Attempting to set project name too $Project_Name..."
-	  gcloud config set project $Project_Name;
+
+	fi
+}
+
+verify_to_proceed () {
+	echo "Continue? (Type 'Y' to proceed)"
+	read CONTINUE
+	if [ "$CONTINUE" != "Y" ]; then
+	  echo "Goodbye for now - Be safe out there"
+	  exit 0;
 	fi
 }
