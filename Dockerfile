@@ -1,3 +1,5 @@
+# Taken from https://dev.to/zenika/deploying-your-spring-boot-application-in-cloud-run-59i4
+
 FROM maven:3.6.3-openjdk-11-slim as builder
 
 WORKDIR /app

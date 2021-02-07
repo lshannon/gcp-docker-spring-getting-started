@@ -112,6 +112,12 @@ verify_location_routine () {
 verify_container_registry_enabled () {
 	echo "Ensure the Container Registry API is enabled in your project"
 	echo "https://cloud.google.com/container-registry"
+  echo "Do you want this script to enable the API? (Type Y to proceed):"
+  read PROCEED
+  if [ "$PROCEED" != "Y" ]; then
+    echo "Running 'gcloud services enable containerregistry.googleapis.com'"
+    gcloud services enable containerregistry.googleapis.com
+  fi
 	verify_to_proceed
 }
 
@@ -126,7 +132,8 @@ first_time_docker () {
 	echo "Is this your first time publishing a Docker Image to the project?"
 	read First_Time_Docker
 	if [ "$CONFIRMATION" = "Y" ]; then
-
+      echo "Running 'auth configure-docker'"
+      gcloud auth configure-docker
 	fi
 }
 
