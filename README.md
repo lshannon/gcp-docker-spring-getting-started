@@ -29,7 +29,7 @@ To get the script in while the root of the project:
 
 ```shell
 
-wget https://github.com/lshannon/gcp-docker-spring-getting-started/blob/main/build-deploy-docker-gcp.sh
+wget https://raw.githubusercontent.com/lshannon/gcp-docker-spring-getting-started/main/build-deploy-docker-gcp.sh
 
 ```
 
@@ -37,7 +37,7 @@ To get the Docker image in the root of the project:
 
 ```shell
 
-wget https://github.com/lshannon/gcp-docker-spring-getting-started/blob/main/Dockerfile
+https://raw.githubusercontent.com/lshannon/gcp-docker-spring-getting-started/main/Dockerfile
 
 ```
 
