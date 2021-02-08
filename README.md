@@ -15,7 +15,7 @@ This script is intended for the following environment:
 - glcoud installed locally (https://cloud.google.com/sdk/docs/install)
 - docker installed locally (https://docs.docker.com/get-docker/)
 
-This script was built to run in a Ubuntu environment. There is no guarantee it will work in any other environment
+__This script was built to run in a Ubuntu environment. There is no guarantee it will work in any other environment__
 
 ## Usage
 
