@@ -15,7 +15,7 @@ This script is intended for the following environment:
 - glcoud installed locally (https://cloud.google.com/sdk/docs/install)
 - docker installed locally (https://docs.docker.com/get-docker/)
 
-This script was built to run in a Ubuntu environment. There is no guarantee it will work in any other environment
+__This script was built to run in a Ubuntu environment. There is no guarantee it will work in any other environment__
 
 ## Usage
 
@@ -24,6 +24,22 @@ Run the script with the argument './build-deploy-docker-gcp.sh --usage' to get i
 ## Installation
 
 Download the script and Dockerfile from this repo into the root direction of your Spring Boot Maven Application
+
+To get the script in while the root of the project:
+
+```shell
+
+wget https://raw.githubusercontent.com/lshannon/gcp-docker-spring-getting-started/main/build-deploy-docker-gcp.sh
+
+```
+
+To get the Docker image in the root of the project:
+
+```shell
+
+wget https://raw.githubusercontent.com/lshannon/gcp-docker-spring-getting-started/main/Dockerfile
+
+```
 
 ## Execution
 
