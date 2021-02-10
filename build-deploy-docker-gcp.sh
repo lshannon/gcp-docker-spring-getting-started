@@ -25,7 +25,7 @@ function disclaimer {
 function change_project_routine {
 	PROJECTNAME=`gcloud info | grep -oP "Project: \[(\K.+)(?=\])"`
 	echo "Your current project is: $PROJECTNAME"
-	echo "Is $PROJECTNAME name correct? (Type 'N' to change the name, hit ENTER to continue):"
+	echo "Is $PROJECTNAME name correct? (Type 'N' to change the name, type 'Y' to continue):"
 	read CORRECTPROJECTCONFIRMED
 	if [ "$CORRECTPROJECTCONFIRMED" = "N" ]; then
 		echo "OK, we can changed the project name"
@@ -38,7 +38,7 @@ function change_project_routine {
 	fi
 	echo "We will be proceeding with $PROJECTNAME as your project"
 	gcloud config set project $PROJECTNAME;
-	echo "Do you want to run 'gcloud auth login'? If you have not done this already, this script will fail. Type Y to run it, Hit Enter to continue without running it:"
+	echo "Do you want to run 'gcloud auth login'? If you have not done this already, this script will fail. Type 'Y' to run it, Type 'N' to continue without running it:"
   	read RUNAUTH
   	if [ "$RUNAUTH" == "Y" ]; then
     	echo "Running the Auth command. Open the link that is provided in your browser to authenticate..."
@@ -103,7 +103,7 @@ function verify_location_routine {
 function verify_container_registry_enabled {
 	echo "Ensure the Container Registry API is enabled in your project"
 	echo "https://cloud.google.com/container-registry"
-  	echo "Do you want this script to enable the API? Type Y to run it, Type ENTER to continue without running it:"
+  	echo "Do you want this script to enable the API? Type 'Y' to run this command, Type 'N' to continue without running it:"
   	read PROCEED
   	if [ "$PROCEED" == "Y" ]; then
     	echo "Running 'gcloud services enable containerregistry.googleapis.com'"
@@ -121,7 +121,7 @@ function collect_image_name_routine {
 }
 
 function first_time_docker {
-	echo "Is this your first time publishing Docker Image $IMAGENAME to the project $PROJECTNAME? Type Y to configure $PROJECTNAME for Docker use. Type ENTER to continue"
+	echo "Is this your first time publishing Docker Image $IMAGENAME to the project $PROJECTNAME? Type 'Y' to configure $PROJECTNAME for Docker use. Type 'N' to skip this set up:"
 	read FIRSTTIMEDOCKER
 	if [ "$FIRSTTIMEDOCKER" == "Y" ]; then
       echo "Running 'auth configure-docker'"
