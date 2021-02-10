@@ -56,6 +56,16 @@ function deploy_docker_image {
 	docker push gcr.io/$PROJECTNAME/$IMAGENAME:latest
 }
 
+function run_docker_image_locally {
+  echo "Do you want to run this Docker Image locally? ('Y' to run locally, 'N' to continue without running):"
+  read PROCEED
+  if [ "$PROCEED" == "Y" ]; then
+    docker run -d -p 8989:8989 gcr.io/$PROJECTNAME/$IMAGENAME:latest
+    echo "In a seperate window: sudo tail -f /var/lib/docker/containers/{imageId}/{imageId}-json.log"
+  fi
+  verify_to_proceed
+}
+
 
 function test_for_sudo {
 	if [ "$EUID" -ne 0 ]
@@ -138,29 +148,32 @@ disclaimer
 # This script should be ran as sudo
 test_for_sudo
 
-#This script requires gcloud
+# This script requires gcloud
 test_for_gcloud
 
-#This script requires docker
+# This script requires docker
 test_for_docker
 
-#Get gcloud pointing at the correct project
+# Get gcloud pointing at the correct project
 change_project_routine
 
-#Verify the correct location before proceeding
+# Verify the correct location before proceeding
 verify_location_routine
 
-#Get the image name
+# Get the image name
 collect_image_name_routine
 
-#Check if the Container Registry API is enabled
+# Check if the Container Registry API is enabled
 verify_container_registry_enabled
 
-#Potential Docker Set Up
+# Potential Docker Set Up
 first_time_docker
 
-#Build the docker image
+# Build the docker image
 build_docker_image
 
-#Deploy the docker image
+# Run Locally
+run_docker_image_locally
+
+# Deploy the docker image
 deploy_docker_image
